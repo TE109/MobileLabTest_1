@@ -82,13 +82,16 @@ struct ContentView: View {
                         dismissButton: .default(Text("OK"))
                     )
                 }
+            
+           // An Image view that displays either a check mark or an 'X' based on the selectedImage value
+            // The Image is resizable and scalled to fit the screen
             Image(selectedImage)
                 .resizable()
                 .scaledToFit()
             
             
         }
-        .padding()
+        // When the view appears on screen, the onAppear modifier triggers the startTimer() function
         .onAppear {
             startTimer()
         }

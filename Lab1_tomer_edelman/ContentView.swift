@@ -13,10 +13,17 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    
+    // The variables use @State so they can be updated in the code
+    // Generate a random Number from 1 to 99
     @State private var num = Int.random(in: 1..<100)
+    // A variable to store the name of the image to select Thats mutable
     @State private var selectedImage: String = ""
+    // A Tuple to store the number of correct and incorrect answers
     @State private var answers = (correct: 0, incorrect: 0)
+    // A Boolean variable to that decides when to show
     @State private var showAlert = false
+    // Timer Variable to store a refrence to a timer element 
     @State private var timer: Timer? = nil
     
     var body: some View {

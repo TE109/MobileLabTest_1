@@ -20,13 +20,15 @@ struct ContentView: View {
             Text("Prime")
                 .padding()
                 .onTapGesture {
-                    num = 2
+                    if(isPrime(num)){
+                        num = 2
+                    }
                 }
             
             Text("Not Prime")
                 .padding()
                 .onTapGesture {
-                    if(isPrime(<#T##number: Int##Int#>)){
+                    if(!isPrime(num)){
                         num = 22
                     }
                 }

@@ -33,8 +33,8 @@ struct ContentView: View {
             Text("Random Number: \(num)")
                 .padding()
             
-            // A Text view that displays the word "Prime".
-            // When the user taps on this text, the onTapGesture is triggered.
+            // A Text view that displays the word "Prime"
+            // When the user taps on this text, the onTapGesture is triggered
             // if the Number is a prime number
             // the image becames a check mark and correct is incremented by 1
             // if not the image becames a x and incorrect incresses by 1
@@ -52,7 +52,11 @@ struct ContentView: View {
                     checkAnswer()
                 }
             
-            
+            // A Text view that displays the word "Not Prime"
+            // When the user taps on this text, the onTapGesture is triggered
+            // if the Number is not a prime number
+            // the image becames a check mark and correct is incremented by 1
+            // if not the image becames a x and incorrect incresses by 1
             Text("Not Prime")
                 .padding()
                 .onTapGesture {

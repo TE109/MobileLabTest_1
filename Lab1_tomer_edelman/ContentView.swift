@@ -11,6 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var num = Int.random(in: 1..<100)
+    @State private var selectedImage: String = "istockphoto-1205148147-612x612"
     
     var body: some View {
         VStack {
@@ -20,18 +21,29 @@ struct ContentView: View {
             Text("Prime")
                 .padding()
                 .onTapGesture {
-                    if(isPrime(num)){
-                        num = 2
+                    if !isPrime(num) {
+                        selectedImage = "Red_X.svg"
+                    } else {
+                        selectedImage = "istockphoto-1205148147-612x612"
                     }
+                    num = Int.random(in: 1..<100)
                 }
+            
             
             Text("Not Prime")
                 .padding()
                 .onTapGesture {
-                    if(!isPrime(num)){
-                        num = 22
+                    if !isPrime(num) {
+                        selectedImage = "istockphoto-1205148147-612x612"
+                    } else {
+                        selectedImage = "Red_X.svg"
                     }
+                    num = Int.random(in: 1..<100)
                 }
+            
+            Image(selectedImage)
+                .resizable()
+                .scaledToFit()
         }
         .padding()
     }

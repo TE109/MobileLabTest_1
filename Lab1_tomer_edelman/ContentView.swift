@@ -10,19 +10,36 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]  // Query items from the model context
+    @State private var num = Int.random(in: 1..<100)
     
     var body: some View {
         VStack {
-            let num = Int.random(in: 1..<100)
             Text("Random Number: \(num)")
+                .padding()
             
-
+            Text("Prime")
+                .padding()
+                .onTapGesture {
+                    num = 2
+                }
+            
+            Text("Not Prime")
+                .padding()
+                .onTapGesture {
+                    if(isPrime(<#T##number: Int##Int#>)){
+                        num = 22
+                    }
+                }
         }
+        .padding()
     }
+}
+
+func isPrime(_ number: Int) -> Bool {
+    return number > 1 && !(2..<number).contains { number % $0 == 0 }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)  // For preview purposes, using in-memory storage
+        .modelContainer(for: Item.self, inMemory: true)
 }

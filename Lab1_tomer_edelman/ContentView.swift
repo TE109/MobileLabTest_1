@@ -8,15 +8,13 @@
 import SwiftUI
 import SwiftData
 
-// TODO
-// Add State Variavle to store how many times correct or Not
-
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var num = Int.random(in: 1..<100)
     @State private var selectedImage: String = ""
     @State private var answers = (correct: 0, incorrect: 0)
     @State private var showAlert = false
+    
     
     var body: some View {
         VStack {
@@ -28,7 +26,7 @@ struct ContentView: View {
                 .onTapGesture {
                     if !isPrime(num) {
                         selectedImage = "Red_X.svg"
-                        answers.correct -= 1
+                        answers.incorrect -= 1
                     } else {
                         selectedImage = "istockphoto-1205148147-612x612"
                         answers.correct += 1
@@ -46,7 +44,7 @@ struct ContentView: View {
                         answers.correct += 1
                     } else {
                         selectedImage = "Red_X.svg"
-                        answers.correct -= 1
+                        answers.incorrect -= 1
                     }
                     num = Int.random(in: 1..<100)
                     checkAnswer()
@@ -76,6 +74,8 @@ struct ContentView: View {
             showAlert = true
         }
     }
+    
+     
 }
 
 

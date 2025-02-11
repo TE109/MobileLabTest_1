@@ -70,6 +70,11 @@ struct ContentView: View {
                     num = Int.random(in: 1..<100)
                     checkAnswer()
                 }
+            
+                // If isPresented is True
+                // Display an allert with the title of Answers
+                // A Message displaying the number of correct and incorrect aswers
+                // A Dismiss button with text of "OK"
                 .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text("Answers"),

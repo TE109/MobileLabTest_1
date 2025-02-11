@@ -14,7 +14,8 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Random Number: \(Int.random(in: 1..<100))")  // Display the random number
+            let num = Int.random(in: 1..<100)
+            Text("Random Number: \(num)")
             
 
         }

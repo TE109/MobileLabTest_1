@@ -97,18 +97,22 @@ struct ContentView: View {
         }
     }
     
+    // Function to return True if a number is prime or False if not prime
     func isPrime(_ number: Int) -> Bool {
         return number > 1 && !(2..<number).contains { number % $0 == 0 }
     }
     
+    // If there has been a total of 10 answers show the alert
     func checkAnswer() {
         if(answers.correct + answers.incorrect == 10){
             showAlert = true
         }
     }
     
+    // Every 5 seconds add one to the incorrect counter and display a red X
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in selectedImage = "Red_X.svg";  answers.incorrect += 1
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in selectedImage = "Red_X.svg";
+            answers.incorrect += 1
             num = Int.random(in: 1..<100)
             checkAnswer()
         }

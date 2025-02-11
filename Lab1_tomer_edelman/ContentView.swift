@@ -5,6 +5,9 @@
 //  Created by user271259 on 2/10/25.
 //
 
+
+// TODO ADD TIMER
+
 import SwiftUI
 import SwiftData
 
@@ -14,7 +17,7 @@ struct ContentView: View {
     @State private var selectedImage: String = ""
     @State private var answers = (correct: 0, incorrect: 0)
     @State private var showAlert = false
-    
+    @State private var timer: Timer? = nil
     
     var body: some View {
         VStack {
@@ -26,7 +29,7 @@ struct ContentView: View {
                 .onTapGesture {
                     if !isPrime(num) {
                         selectedImage = "Red_X.svg"
-                        answers.incorrect -= 1
+                        answers.incorrect += 1
                     } else {
                         selectedImage = "istockphoto-1205148147-612x612"
                         answers.correct += 1
@@ -44,7 +47,7 @@ struct ContentView: View {
                         answers.correct += 1
                     } else {
                         selectedImage = "Red_X.svg"
-                        answers.incorrect -= 1
+                        answers.incorrect += 1
                     }
                     num = Int.random(in: 1..<100)
                     checkAnswer()
@@ -63,6 +66,9 @@ struct ContentView: View {
             
         }
         .padding()
+        .onAppear {
+            startTimer()
+        }
     }
     
     func isPrime(_ number: Int) -> Bool {
@@ -75,11 +81,18 @@ struct ContentView: View {
         }
     }
     
-     
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in selectedImage = "Red_X.svg";  answers.incorrect += 1
+            num = Int.random(in: 1..<100)
+            checkAnswer()
+        }
+        
+        
+    }
+    
 }
+    #Preview {
+        ContentView()
+            .modelContainer(for: Item.self, inMemory: true)
+    }
 
-
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
-}

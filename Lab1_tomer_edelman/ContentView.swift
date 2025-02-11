@@ -14,9 +14,10 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var num = Int.random(in: 1..<100)
-    @State private var selectedImage: String = "istockphoto-1205148147-612x612"
+    @State private var selectedImage: String = ""
     @State private var answers = (correct: 0, incorrect: 0)
-
+    @State private var showAlert = false
+    
     var body: some View {
         VStack {
             Text("Random Number: \(num)")
@@ -27,10 +28,13 @@ struct ContentView: View {
                 .onTapGesture {
                     if !isPrime(num) {
                         selectedImage = "Red_X.svg"
+                        answers.correct -= 1
                     } else {
                         selectedImage = "istockphoto-1205148147-612x612"
+                        answers.correct += 1
                     }
                     num = Int.random(in: 1..<100)
+                    checkAnswer()
                 }
             
             
@@ -39,13 +43,22 @@ struct ContentView: View {
                 .onTapGesture {
                     if !isPrime(num) {
                         selectedImage = "istockphoto-1205148147-612x612"
+                        answers.correct += 1
                     } else {
                         selectedImage = "Red_X.svg"
+                        answers.correct -= 1
                     }
                     num = Int.random(in: 1..<100)
+                    checkAnswer()
                 }
-            
-            Image(selectedImage)	
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Answers"),
+                        message: Text("Correct: \(answers.correct), Incorrect: \(answers.incorrect)"),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+            Image(selectedImage)
                 .resizable()
                 .scaledToFit()
             
@@ -53,11 +66,18 @@ struct ContentView: View {
         }
         .padding()
     }
+    
+    func isPrime(_ number: Int) -> Bool {
+        return number > 1 && !(2..<number).contains { number % $0 == 0 }
+    }
+    
+    func checkAnswer() {
+        if(answers.correct + answers.incorrect == 10){
+            showAlert = true
+        }
+    }
 }
 
-func isPrime(_ number: Int) -> Bool {
-    return number > 1 && !(2..<number).contains { number % $0 == 0 }
-}
 
 #Preview {
     ContentView()

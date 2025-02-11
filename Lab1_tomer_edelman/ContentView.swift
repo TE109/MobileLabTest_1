@@ -8,11 +8,15 @@
 import SwiftUI
 import SwiftData
 
+// TODO
+// Add State Variavle to store how many times correct or Not
+
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var num = Int.random(in: 1..<100)
     @State private var selectedImage: String = "istockphoto-1205148147-612x612"
-    
+    @State private var answers = (correct: 0, incorrect: 0)
+
     var body: some View {
         VStack {
             Text("Random Number: \(num)")
@@ -41,9 +45,11 @@ struct ContentView: View {
                     num = Int.random(in: 1..<100)
                 }
             
-            Image(selectedImage)
+            Image(selectedImage)	
                 .resizable()
                 .scaledToFit()
+            
+            
         }
         .padding()
     }

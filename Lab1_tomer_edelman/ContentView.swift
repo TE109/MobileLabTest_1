@@ -23,11 +23,13 @@ struct ContentView: View {
     @State private var answers = (correct: 0, incorrect: 0)
     // A Boolean variable to that decides when to show
     @State private var showAlert = false
-    // Timer Variable to store a refrence to a timer element 
+    // Timer Variable to store a refrence to a timer element
     @State private var timer: Timer? = nil
     
     var body: some View {
         VStack {
+            // A Text view that displays the current value of the random number
+            // Text is Padded for better readability
             Text("Random Number: \(num)")
                 .padding()
             
